@@ -28,7 +28,7 @@ let currentColor = Math.floor(Math.random() * colorList.length);
 let hopeStarCD = 0, skipWordCD = 0;
 
 const resetGame = () => {
-    // Resetting all game variables and UI elements
+    // Resetting all game variadables and UI elements
     pressedLetters = []
     correctLetters = [];
     wrongGuessCount = 0;
