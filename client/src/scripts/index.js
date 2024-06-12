@@ -27,8 +27,8 @@ let currentTimeSet = 0;
 let currentColor = Math.floor(Math.random() * colorList.length);
 let hopeStarCD = 0, skipWordCD = 0;
 
+// Resetting all game variables and UI elements
 const resetGame = () => {
-    // Resetting all game variables and UI elements
     pressedLetters = []
     correctLetters = [];
     wrongGuessCount = 0;
@@ -75,8 +75,8 @@ const setRemainingHearts = () => {
     return heartsHTML;
 }
 
+// After 500ms of game complete... showing modal with relevant details
 const gameOver = (isVictory) => {
-    // After 500ms of game complete... showing modal with relevant details
     setTimeout(() => {
         const modalText = isVictory ? `You found the word:` : `The correct word was:`;
         gameModal.querySelector("img").src = `../assets/images/${isVictory ? 'victory' : 'lost'}.gif`;
