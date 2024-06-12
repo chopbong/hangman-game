@@ -228,8 +228,12 @@ const revealLetter = () => {
     wrongGuessCount += 2;
     hangmanImage.src = `../assets/images/hangman-${wrongGuessCount}.svg`;
     guessesHearts.innerHTML = setRemainingHearts();
-    const letterToReveal = currentWord[Math.floor(Math.random() * currentWord.length)];
-    const button = keyboardDiv.querySelectorAll("button")[letterToReveal.charCodeAt(0) - 97];
+    let letterToReveal, button;
+    do {
+        letterToReveal = currentWord[Math.floor(Math.random() * currentWord.length)];
+        button = keyboardDiv.querySelectorAll("button")[letterToReveal.charCodeAt(0) - 97];
+    }
+    while (button.disabled === true);
     initGame(button, letterToReveal);
 }
 
