@@ -9,18 +9,23 @@ const timeBtn = document.querySelector(".timer button");
 const timeDisplay = document.querySelector(".count-down");
 const hangmanImage = document.querySelector(".hangman-box img");
 const wordDisplay = document.querySelector(".word-display");
-const guessesText = document.querySelector(".guesses-text b");
+const guessesHearts = document.querySelector(".remaining-guesses .hearts");
 const keyboardDiv = document.querySelector(".keyboard");
 const gameModal = document.querySelector(".game-modal");
 const playBtn = document.querySelector(".play");
+const revealLetterBtn = document.querySelector(".help-tools .reveal-letter");
+const hopeStarBtn = document.querySelector(".help-tools .hope-star");
+const skipWordBtn = document.querySelector(".help-tools .skip-word");
+const pointDisPlay = document.querySelector(".points h4");
 const streakDisplay = document.querySelector(".streak-count h4");
 
 const MAXGUESSES = 6;
-let currentWord, correctLetters, wrongGuessCount, timer, isCounted;
-let toPlayMusic = true, streakCount = 0, pressedLetters = [];
+let currentWord, correctLetters, wrongGuessCount, timer, isCounted, isHopeStar;
+let toPlayMusic = true, pointCount = 0, streakCount = 0, pressedLetters = [];
 const timSets = [0, 60, 30, 15];
 let currentTimeSet = 0;
 let currentColor = Math.floor(Math.random() * colorList.length);
+let hopeStarCD = 0, skipWordCD = 0;
 
 const resetGame = () => {
     // Resetting all game variables and UI elements
@@ -28,10 +33,18 @@ const resetGame = () => {
     correctLetters = [];
     wrongGuessCount = 0;
     isCounted = false;
+    isHopeStar = false;
     timeDisplay.innerText = currentTimeSet ? timSets[currentTimeSet] : "";
     hangmanImage.src = `../assets/images/hangman-${wrongGuessCount}.svg`;
-    guessesText.innerText = (`${wrongGuessCount} / ${MAXGUESSES}`);
+    guessesHearts.innerHTML = setRemainingHearts();
     keyboardDiv.querySelectorAll("button").forEach(btn => btn.disabled = false);
+    revealLetterBtn.disabled = false;
+    if (hopeStarCD === 0) {
+        hopeStarBtn.disabled = false;
+    }
+    if (skipWordCD === 0) {
+        skipWordBtn.disabled = false;
+    }
     wordDisplay.innerHTML = currentWord.split("").map(() => `<li class="letter"></li>`).join("");
     gameModal.classList.remove("show");
 }
@@ -45,6 +58,23 @@ const getRandomWord = () => {
     resetGame();
 }
 
+// Set the remaining hearts based on the wrongGuessCount
+const setRemainingHearts = () => {
+    let heartsHTML = ``;
+    for (let i = 0; i < MAXGUESSES - wrongGuessCount; i++) {
+        heartsHTML = heartsHTML.concat(`<i class="fa-solid fa-heart"></i>`);
+    }
+    for (let i = 0; i < wrongGuessCount; i++) {
+        heartsHTML = heartsHTML.concat(`<i class="fa-solid fa-heart-crack"></i>`);
+    }
+    if (wrongGuessCount >= 4) {
+        revealLetterBtn.disabled = true;
+    } else if (wrongGuessCount >= 2) {
+        hopeStarBtn.disabled = true;
+    }
+    return heartsHTML;
+}
+
 const gameOver = (isVictory) => {
     // After 500ms of game complete... showing modal with relevant details
     setTimeout(() => {
@@ -54,6 +84,9 @@ const gameOver = (isVictory) => {
         gameModal.querySelector(".content p").innerHTML = `${modalText} <b>${currentWord}</b>`;
         playBtn.innerText = isVictory ? `Next Word` : `Play Again`;
         gameModal.classList.add("show");
+        hopeStarCD = (hopeStarCD != 0) ? hopeStarCD - 1 : 0;
+        skipWordCD = (isVictory && skipWordCD != 0) ? skipWordCD - 1 : 0;
+        calculatePoint();
         streakCount = isVictory ? streakCount + 1 : 0;
         streakDisplay.innerHTML = streakCount;
     }, 500);
@@ -79,10 +112,13 @@ const initGame = (button, clickedLetter) => {
         // If clickedLetter doesn't exist then update the wrongGuessCount and hangmanImage
         wrongGuessCount++;
         hangmanImage.src = `../assets/images/hangman-${wrongGuessCount}.svg`;
+        if (isHopeStar) {
+            return gameOver(false);
+        }
     }
 
     button.disabled = true;
-    guessesText.innerText = (`${wrongGuessCount} / ${MAXGUESSES}`);
+    guessesHearts.innerHTML = setRemainingHearts();
 
     // Calling gameOver function if any of these condition meets
     if (wrongGuessCount === MAXGUESSES) {
@@ -183,6 +219,58 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// Revealing a random letter existing in the current word (costing 2 hearts)
+const revealLetter = () => {
+    revealLetterBtn.disabled = true;
+    wrongGuessCount += 2;
+    hangmanImage.src = `../assets/images/hangman-${wrongGuessCount}.svg`;
+    guessesHearts.innerHTML = setRemainingHearts();
+    const letterToReveal = currentWord[Math.floor(Math.random() * currentWord.length)];
+    const button = keyboardDiv.querySelectorAll("button")[letterToReveal.charCodeAt(0) - 97];
+    initGame(button, letterToReveal);
+}
+
+// Seting a hope star (costing 4 hearts) for the current word: If any guessed letter then is incorrect, game over!
+const setHopeStar = () => {
+    hopeStarBtn.disabled = true;
+    hopeStarCD = 3;
+    wrongGuessCount += 4;
+    hangmanImage.src = `../assets/images/hangman-${wrongGuessCount}.svg`;
+    guessesHearts.innerHTML = setRemainingHearts();
+    isHopeStar = true;
+}
+
+// Calculating point for each round based on isHopeStar and wrongGuessCount
+const calculatePoint = () => {
+    if (isHopeStar) {
+        pointCount += 500;
+    }
+    else {
+        switch (wrongGuessCount) {
+            case 0:
+                pointCount += 100;
+                break;
+            case 1:
+                pointCount += 80;
+                break;
+            case 2:
+                pointCount += 60;
+                break;
+            case 3:
+                pointCount += 40;
+                break;
+            case 4:
+                pointCount += 20;
+                break;
+            case 5:
+                pointCount += 10;
+                break;
+        }
+    }
+    pointDisPlay.innerText = pointCount;
+}
+
+// GAME START!
 playMusic();
 changeTheme();
 getRandomWord();
@@ -190,3 +278,10 @@ playBtn.addEventListener("click", getRandomWord);
 musicBtn.addEventListener("click", playMusic);
 colorBtn.addEventListener("click", changeTheme);
 timeBtn.addEventListener("click", setTime);
+revealLetterBtn.addEventListener("click", revealLetter);
+hopeStarBtn.addEventListener("click", setHopeStar);
+skipWordBtn.addEventListener("click", () => {
+    getRandomWord();
+    skipWordBtn.disabled = true;
+    skipWordCD = 5;
+});

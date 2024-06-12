@@ -2,7 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 :root {
     /* Storing color variables here */
-    --fallback-color: #5d67b9;
+    --heart-color: #e70b0b;
+    --heart-crack-color: #fd7f7f;
 }
 
 * {
@@ -41,7 +42,7 @@ body {
     justify-content: center;
 }
 
-:where(.keyboard, .game-modal, .background-music, .color-changer, .timer, .tools) button {
+:where(.keyboard, .game-modal, .game-info, .background-music, .color-changer, .timer, .help-tools) button {
     font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -55,18 +56,18 @@ body {
     box-shadow: 0px 4px 0 var(--sub-color);
 }
 
-:where(.keyboard, .background-music, .color-changer, .timer, .tools) button {
+:where(.keyboard, .game-info, .background-music, .color-changer, .timer, .help-tools) button {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-:where(.keyboard, .tools) button:hover {
+:where(.keyboard, .help-tools) button:hover {
     margin-bottom: -8px;
     box-shadow: none;
 }
 
-:where(.background-music, .color-changer, .timer) button {
+:where(.game-info, .background-music, .color-changer, .timer) button {
     width: 30px;
     height: 30px;
     padding: 3px 6px;
@@ -146,8 +147,12 @@ body {
 }
 
 .game-box .remaining-guesses i {
-    color: #e70b0b;
-    margin: 0 1px;
+    color: var(--heart-color);
+    margin: 0 2px;
+}
+
+.game-box .remaining-guesses i.fa-heart-crack {
+    color: var(--heart-crack-color);
 }
 
 .game-box .keyboard {
@@ -164,7 +169,7 @@ body {
     padding: 7px;
 }
 
-:where(.keyboard, .tools) button[disabled] {
+:where(.keyboard, .help-tools) button[disabled] {
     background-color: var(--sub-color);
     box-shadow: none;
     margin-bottom: -8px;
@@ -176,24 +181,23 @@ body {
     z-index: 900;
     top: 15px;
     right: 15px;
-    width: 250px;
     border-radius: 10px;
     color: #fff;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-around;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: 15px;
 }
 
-.tools {
+.help-tools {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 7.5px;
 }
 
-.tools button {
+.help-tools button {
     width: 35px;
     height: 35px;
     border-radius: 50%;
