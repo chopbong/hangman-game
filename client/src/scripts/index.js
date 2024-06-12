@@ -3,6 +3,9 @@ import colorList from "./theme-color-list.js";
 // Import the "wordList" array
 import wordList from "./hangman-word-list.js";
 
+const infoBtn = document.querySelector(".game-info");
+const aboutDisplay = document.querySelector(".game-about")
+const exitInfoBtn = document.querySelector(".game-about .exit")
 const musicBtn = document.querySelector(".background-music button");
 const colorBtn = document.querySelector(".color-changer button");
 const timeBtn = document.querySelector(".timer button");
@@ -275,6 +278,12 @@ playMusic();
 changeTheme();
 getRandomWord();
 playBtn.addEventListener("click", getRandomWord);
+infoBtn.addEventListener("click", () => {
+    aboutDisplay.classList.add("show");
+})
+exitInfoBtn.addEventListener("click", () => {
+    aboutDisplay.classList.remove("show");
+})
 musicBtn.addEventListener("click", playMusic);
 colorBtn.addEventListener("click", changeTheme);
 timeBtn.addEventListener("click", setTime);

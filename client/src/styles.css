@@ -42,7 +42,7 @@ body {
     justify-content: center;
 }
 
-:where(.keyboard, .game-modal, .game-info, .background-music, .color-changer, .timer, .help-tools) button {
+:where(.keyboard, .game-modal, .game-info, .background-music, .color-changer, .timer, .help-tools, .exit) button {
     font-size: 1rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -53,10 +53,10 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    box-shadow: 0px 4px 0 var(--sub-color);
+    box-shadow: 0px 4px 0 var(--sub-color, #8b97e2);
 }
 
-:where(.keyboard, .game-info, .background-music, .color-changer, .timer, .help-tools) button {
+:where(.keyboard, .game-info, .background-music, .color-changer, .timer, .help-tools, .exit) button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,7 +67,7 @@ body {
     box-shadow: none;
 }
 
-:where(.game-info, .background-music, .color-changer, .timer) button {
+:where(.game-info, .background-music, .color-changer, .timer, .exit) button {
     width: 30px;
     height: 30px;
     padding: 3px 6px;
@@ -146,7 +146,7 @@ body {
     font-weight: 600;
 }
 
-.game-box .remaining-guesses i {
+:where(.game-box .remaining-guesses, .game-about) i.fa-heart {
     color: var(--heart-color);
     margin: 0 2px;
 }
@@ -170,7 +170,7 @@ body {
 }
 
 :where(.keyboard, .help-tools) button[disabled] {
-    background-color: var(--sub-color);
+    background-color: var(--sub-color, #8b97e2);
     box-shadow: none;
     margin-bottom: -8px;
     pointer-events: none;
@@ -208,13 +208,13 @@ body {
     width: 100px;
     height: 35px;
     border-radius: 50px;
-    background: var(--color);
+    background: var(--color, #5d67b9);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     pointer-events: none;
-    box-shadow: 0px 4px 0 var(--sub-color);
+    box-shadow: 0px 4px 0 var(--sub-color, #8b97e2);
 }
 
 .streak-count {
@@ -224,14 +224,14 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 12.5px;
-    background: var(--color);
+    background: var(--color, #5d67b9);
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    box-shadow: 0px 4px 0 var(--sub-color);
+    box-shadow: 0px 4px 0 var(--sub-color, #8b97e2);
 }
 
 .streak-count h4 {
@@ -246,7 +246,7 @@ body {
     margin-top: 8px;
 }
 
-.game-modal {
+.game-modal, .game-about {
     position: fixed;
     top: 0;
     left: 0;
@@ -263,19 +263,22 @@ body {
     transition: opacity 1s ease;
 }
 
-.game-modal.show {
+.game-modal.show, .game-about.show {
     opacity: 1;
     pointer-events: auto;
     transition: opacity 0.5s ease;
 }
 
-.game-modal .content {
+:where(.game-modal, .game-about) .content {
     background: #fff;
-    max-width: 450px;
     width: 100%;
-    text-align: center;
     border-radius: 10px;
     padding: 25px;
+}
+
+.game-modal .content {
+    max-width: 450px;
+    text-align: center;
 }
 
 .game-modal img {
@@ -300,6 +303,59 @@ body {
 
 .game-modal button {
     padding: 7px 17px;
+}
+
+.game-about .content {
+    position: relative;
+    max-width: 450px;
+    padding: 20px;
+    overflow: auto;
+}
+
+.game-about .exit {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.game-about h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.game-about p {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: justify;
+    margin-top: 15px;
+}
+
+.game-about b {
+    font-weight: 600;
+}
+
+.game-about li {
+    list-style: none;
+    margin: 5px 0;
+    padding: 0 0 0 10px;
+}
+
+.game-about i:not(.fa-heart):not(.fa-xmark) {
+    font-size: 1rem;
+    color: var(--color, #5d67b9);
+    margin: 0 2px;
+}
+
+.game-about i.fa-hand-point-right {
+    padding-left: 3.5px;
+}
+
+.game-about .thanks {
+    font-weight: 600;
+    padding-top: 5px;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 950px) {
