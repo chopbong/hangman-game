@@ -145,8 +145,9 @@ body {
     font-weight: 600;
 }
 
-.game-box .guesses-text b {
+.game-box .remaining-guesses i {
     color: #e70b0b;
+    margin: 0 1px;
 }
 
 .game-box .keyboard {
@@ -195,13 +196,14 @@ body {
 .tools button {
     width: 35px;
     height: 35px;
+    border-radius: 50%;
 }
 
 .points h4 {
     font-size: 1.5rem;
     width: 100px;
     height: 35px;
-    border-radius: 5px;
+    border-radius: 50px;
     background: var(--color);
     display: flex;
     align-items: center;
@@ -217,7 +219,7 @@ body {
     right: 40px;
     width: 50px;
     height: 50px;
-    border-radius: 5px;
+    border-radius: 12.5px;
     background: var(--color);
     color: #fff;
     display: flex;
@@ -235,7 +237,7 @@ body {
 }
 
 .streak-count p {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 500;
     margin-top: 8px;
 }
