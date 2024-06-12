@@ -1,0 +1,332 @@
+/* Importing Google font - Open Sans */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+:root {
+    /* Storing color variables here */
+    --fallback-color: #5d67b9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--color, #5d67b9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height : 100vh;
+    padding: 0 15px;
+}
+.container {
+    background: #fff;
+    width: 950px;
+    padding: 120px 50px 50px 50px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 0 #000;
+    position: relative;
+}
+
+.settings-box {
+    position: absolute;
+    z-index: 900;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+:where(.keyboard, .game-modal, .background-music, .color-changer, .timer, .tools) button {
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background: var(--color, #5d67b9);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 0 var(--sub-color);
+}
+
+:where(.keyboard, .background-music, .color-changer, .timer, .tools) button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:where(.keyboard, .tools) button:hover {
+    margin-bottom: -8px;
+    box-shadow: none;
+}
+
+:where(.background-music, .color-changer, .timer) button {
+    width: 30px;
+    height: 30px;
+    padding: 3px 6px;
+}
+
+.gameplay-box {
+    display: flex;
+    align-items: flex-end;
+    gap: 50px;
+}
+
+.hangman-box {
+    position: relative;
+}
+
+.hangman-box img {
+    max-width: 300px;
+    pointer-events: none;
+}
+
+.hangman-box .count-down {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin-top: -60px;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--color, #5d67b9);
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+    pointer-events: none;
+}
+
+.hangman-box h1 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 20px
+}
+
+.word-display {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+}
+
+.word-display .letter {
+    font-size: 2rem;
+    width: 30px;
+    border-bottom: solid 3.5px #000;
+    margin-bottom: 40px;
+}
+
+.word-display .letter.guessed {
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    border-color: transparent;
+    margin: -40px 0 30px 0;
+}
+
+.game-box h4 {
+    font-size: 1.05rem;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.game-box h4 b {
+    font-weight: 600;
+}
+
+.game-box .guesses-text b {
+    color: #e70b0b;
+}
+
+.game-box .keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7.5px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.keyboard button {
+    width: calc(100% / 9 - 7.5px);
+    padding: 7px;
+}
+
+:where(.keyboard, .tools) button[disabled] {
+    background-color: var(--sub-color);
+    box-shadow: none;
+    margin-bottom: -8px;
+    pointer-events: none;
+}
+
+.points-box {
+    position: absolute;
+    z-index: 900;
+    top: 15px;
+    right: 15px;
+    width: 250px;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.tools {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tools button {
+    width: 35px;
+    height: 35px;
+}
+
+.points h4 {
+    font-size: 1.5rem;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    background: var(--color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+    box-shadow: 0px 4px 0 var(--sub-color);
+}
+
+.streak-count {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background: var(--color);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    box-shadow: 0px 4px 0 var(--sub-color);
+}
+
+.streak-count h4 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: -10px;
+}
+
+.streak-count p {
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.game-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    display: flex;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+}
+
+.game-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s ease;
+}
+
+.game-modal .content {
+    background: #fff;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.game-modal img {
+    max-width: 125px;
+    margin-bottom: 20px;
+}
+
+.game-modal h4 {
+    font-size: 1.4rem;
+}
+
+.game-modal p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 10px 0 20px 0;
+}
+
+.game-modal p b {
+    font-weight: 600;
+    color: var(--color, #5d67b9);
+}
+
+.game-modal button {
+    padding: 7px 17px;
+}
+
+@media (max-width: 950px) {
+    .container {
+        padding: 65px 15px 25px 15px;
+    }
+    .gameplay-box {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 0;
+    }
+
+    .hangman-box img {
+        max-width: 185px;
+        margin-bottom: 10px;
+    }
+
+    .hangman-box .count-down {
+        font-size: 2.5rem;
+        margin-top: -25px;
+    }
+
+    .hangman-box h1 {
+        display: none;
+    }
+
+    .word-display {
+        gap: 7px;
+        padding: 0 10px;
+    }
+
+    .word-display .letter {
+        font-size: 1.85rem;
+        width: 27px;
+    }
+}
