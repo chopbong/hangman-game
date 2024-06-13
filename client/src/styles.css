@@ -153,6 +153,7 @@ body {
 
 .game-box .remaining-guesses i.fa-heart-crack {
     color: var(--heart-crack-color);
+    margin: 0 2px;
 }
 
 .game-box .keyboard {
