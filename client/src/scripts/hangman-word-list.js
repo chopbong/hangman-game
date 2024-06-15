@@ -257,7 +257,7 @@ const wordList = [
     { word: "phone", hint: "Communication device used for making calls and accessing the internet" },
     { word: "glasses", hint: "Optical device worn to correct vision or protect the eyes" },
     { word: "shoes", hint: "Footwear worn to protect and comfort the foot, typically made of leather or synthetic material" },
-    { word: "umbrella", hint: "A object usually made of fabric, used to cover the sun and rain" },
+    { word: "umbrella", hint: "An object usually made of fabric, used to cover the sun and rain" },
     { word: "wallet", hint: "Small, flat case for carrying money, credit cards, and identification" },
     { word: "key", hint: "Small metal object used to open and close locks" },
     { word: "lamp", hint: "Device for producing light, typically with a bulb or tube" },
